@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "aperture.project.v1",
+  "productType": "application",
+  "context": {
+    "required": [
+      "README.md",
+      "package.json",
+      "src/kyc.ts",
+      "test/kyc.test.ts"
+    ],
+    "allowed": [
+      "README.md",
+      "package.json",
+      "src/kyc.ts",
+      "test/kyc.test.ts"
+    ]
+  },
+  "checks": [
+    {
+      "name": "node-tests",
+      "command": ["npm", "test"],
+      "timeoutMs": 300000
+    }
+  ],
+  "testPaths": ["test"],
+  "policy": {
+    "maximumRisk": "high",
+    "allowUnisolatedRuntime": true
+  }
+}
