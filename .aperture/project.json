@@ -20,8 +20,19 @@
       "name": "node-tests",
       "command": ["npm", "test"],
       "timeoutMs": 300000
+    },
+    {
+      "name": "application-build",
+      "kind": "build",
+      "command": ["npm", "run", "build"],
+      "timeoutMs": 120000
     }
   ],
+  "artifact": {
+    "profile": "application_build",
+    "buildCheck": "application-build",
+    "outputs": ["dist/kyc.js", "dist/bankAiCases.js"]
+  },
   "testPaths": ["test"],
   "policy": {
     "maximumRisk": "high",
