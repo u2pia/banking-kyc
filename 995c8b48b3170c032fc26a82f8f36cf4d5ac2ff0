@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "ai-provenance/v1",
+  "artifactId": "prov-b2139a30a53a1367",
+  "recordedAt": "2026-10-12T07:17:34Z",
+  "binding": {
+    "repository": "https://github.com/u2pia/banking-kyc.git",
+    "baseTree": "9f2694e5f7582a6c8e8c6f5c63c0a0d0542ad32d",
+    "headTree": "sha1:36528352435cef346cff374376787cc0bfdbf35f",
+    "patchId": "sha1:b2139a30a53a136723b5f1dd4553970e40a45adb",
+    "commitSha": "995c8b48b3170c032fc26a82f8f36cf4d5ac2ff0",
+    "branch": "HEAD"
+  },
+  "change": {
+    "title": "生成全球5大银行在KYC方面的AI应用",
+    "filesChanged": 3,
+    "additions": 341,
+    "deletions": null,
+    "author": {
+      "kind": "agent",
+      "id": "RUN-6B95E4FC",
+      "displayName": "u2pia.cc"
+    }
+  },
+  "intent": {
+    "status": "approved",
+    "id": "WI-B410CCBB:v1",
+    "version": 1,
+    "statement": "用户触发报告生成后，应用返回一份 Markdown 文本，列出全球市值前五的银行，并分别说明其在 KYC 场景中的 AI 应用。",
+    "nonGoals": [
+      "不提供实时市值行情、金融数据接入或自动抓取外部网页。",
+      "不接入银行内部系统、客户身份数据或交易数据。",
+      "不生成针对具体客户或具体交易的尽调、审批或合规决定。",
+      "不提供 PDF、Word 或其他格式导出。"
+    ],
+    "constraints": [
+      "不得删除、跳过或弱化既有测试。",
+      "不得处理、存储或输出真实个人身份信息或客户 KYC 数据。",
+      "不得将生成内容标注为监管批准、法律意见或正式合规结论。",
+      "不得在缺少市值排名数据时点或来源说明时输出排名结果。",
+      "不得要求人工修改测试或构建配置才能使 application-build 通过。"
+    ],
+    "acceptanceCriteria": [
+      {
+        "id": "AC-1",
+        "statement": "node-tests 中存在测试用例 generateTopFiveBankKycAiReport，断言调用报告生成入口返回非空字符串，且字符串以 '# ' 开头。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-2",
+        "statement": "node-tests 断言生成结果字符串包含 'KYC' 和 'AI'。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-3",
+        "statement": "node-tests 断言生成结果中匹配 /^## /gm 的数量等于 5。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-4",
+        "statement": "node-tests 断言每个二级标题后的 2000 字符内都包含 'KYC' 和 'AI'。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-5",
+        "statement": "node-tests 断言生成结果同时包含 '市值'、'排名' 和 '截至'。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-6",
+        "statement": "node-tests 断言生成结果不包含邮箱地址形式的字符串，即不包含由非空白字符组成且包含 @ 和后继 . 的连续片段。",
+        "criticality": "normal",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-7",
+        "statement": "application-build 执行成功，退出码为 0。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "proven"
+      },
+      {
+        "id": "AC-8",
+        "statement": "由具备咨询报告经验的人判断：每个银行章节列出至少 2 个具体 KYC AI 应用点，并且不包含 ‘最佳’、‘最领先’、‘保证合规’ 这类无法核验的绝对化表述。",
+        "criticality": "normal",
+        "verificationType": "human",
+        "status": "unproven"
+      }
+    ],
+    "approvedBy": {
+      "kind": "human",
+      "id": "ACT-812022DB",
+      "at": "2026-10-12T07:07:40.521Z",
+      "identityAssurance": "local_session"
+    },
+    "source": "control_plane",
+    "retroactive": false
+  },
+  "generation": {
+    "model": {
+      "requested": "qwen3.8-max",
+      "served": "qwen3.8-max",
+      "models": [
+        "qwen3.8-max"
+      ],
+      "source": "control_plane"
+    },
+    "capabilities": {
+      "enforcement": "unavailable",
+      "source": "control_plane",
+      "allowedTools": [
+        "list_files",
+        "read_file",
+        "write_file",
+        "replace_in_file",
+        "finish"
+      ],
+      "mcpServers": [],
+      "network": "unrestricted",
+      "sandbox": {
+        "kind": "none",
+        "productionEligible": false
+      }
+    },
+    "context": {
+      "injected": [
+        {
+          "path": "README.md",
+          "digest": "sha256:62046a23c7bdbc0bb20313ca67ba582f630199aa3985ac5f5113a24ab312c4c0",
+          "bytes": 1060,
+          "required": true
+        },
+        {
+          "path": "package.json",
+          "digest": "sha256:7db4cbabbb822e539fade6e19c802f28f7fa1f660bdef6257105ef067a341914",
+          "bytes": 199,
+          "required": true
+        },
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:d230e48e06b163eee45694f4ea04ab00e4f7f49129dead5aa41acd060a1cb40a",
+          "bytes": 613,
+          "required": true
+        },
+        {
+          "path": "test/kyc.test.ts",
+          "digest": "sha256:6a89cb91716a2058c704e31fb4313caa4ba6dd3d1586627758d19ac5508a63fc",
+          "bytes": 495,
+          "required": true
+        }
+      ],
+      "agentRead": [
+        {
+          "path": "scripts/build.mjs",
+          "digest": "sha256:0c0604070f687380f2f8b587a057605a13c385992e5ead5e05310d732eebbdbc",
+          "declared": false,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "src/bankAiCases.ts",
+          "digest": "sha256:bc287576434caff2c29279bb47523bc7e12654735bfc24e6fe57e8cd8d24cbf8",
+          "declared": false,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "src/kycFlow.ts",
+          "digest": "sha256:24dbc85a3f8c69d1bd1510219cc291512fa0b3475ecbd08e26f59ff7860ac3f2",
+          "declared": false,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "test/bankAiCases.test.ts",
+          "digest": "sha256:df7b7ad3a25c564c68eafdcc905e10fb37805aaa8f5efb4becac498dbee624a5",
+          "declared": false,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "test/topFiveBankKycAi.test.ts",
+          "digest": "sha256:329d8515df4f32f671c3b4839de0156052ce40ae509c11db066f77ddb9c4db2e",
+          "declared": false,
+          "source": "builder_wrapper"
+        }
+      ],
+      "retrieved": [],
+      "skills": []
+    },
+    "harness": {
+      "name": "local-command-agent@0.2",
+      "version": null,
+      "digest": "sha256:0143ba3f1c2d9e586115f17d1adcf454079ff28ddc7d684339b43e7dbacc1a1e"
+    },
+    "budget": {
+      "stopReason": "completed"
+    }
+  },
+  "output": null,
+  "checks": [
+    {
+      "name": "node-tests",
+      "kind": "test",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 496,
+      "provenance": "pre_existing",
+      "isolation": "none",
+      "stdoutDigest": "sha256:184c205c86de6013d30e9dc1c2171946ebaabfefbf1de37290c45df5ed8b1d26",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "application-build",
+      "kind": "build",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 293,
+      "provenance": "unknown",
+      "isolation": "none",
+      "stdoutDigest": "sha256:5e386d736e8b8dc85ef013414bd998f87acc5e0905969e3eed2a98bc0034afab",
+      "stderrDigest": "sha256:99c23bfee7dae73b42ec679d9dd3e4e644824a86b0eaa1c531582ce1b33b7ac1"
+    },
+    {
+      "name": "node-tests@baseline",
+      "kind": "test",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 430,
+      "provenance": "unknown",
+      "isolation": "none",
+      "stdoutDigest": "sha256:93085b2bff41f4da0d60b320888881d41df095ac46551330447c4f16f4570ad7",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review": [
+    {
+      "decision": "approved",
+      "actorId": "ACT-812022DB",
+      "displayName": "Real Case Reviewer",
+      "at": "2026-10-12T07:16:38.008Z",
+      "headSha": "2d24078b3da01ca526bdbfa99090045b45a7fc1a",
+      "identityAssurance": "local_session",
+      "comment": "AC-1（node-tests 中存在测试用例 generateTopFiveBankKy…）：已核对，确认通过（读过 Agent 写的测试）\nAC-2（node-tests 断言生成结果字符串包含 'KYC' 和 'AI'。）：已核对，确认通过（读过 Agent 写的测试）\nAC-3（node-tests 断言生成结果中匹配 /^## /gm 的数量等于 5。）：已核对，确认通过（读过 Agent 写的测试）\nAC-4（node-tests 断言每个二级标题后的 2000 字符内都包含 'KYC' …）：已核对，确认通过（读过 Agent 写的测试）\nAC-5（node-tests 断言生成结果同时包含 '市值'、'排名' 和 '截至'。）：已核对，确认通过（读过 Agent 写的测试）",
+      "selfApproved": false
+    }
+  ],
+  "evidence": [
+    {
+      "uri": "local://evidence/2d24078b3da0/RUN-6B95E4FC.json",
+      "digest": "sha256:sha256:819fbe28169e1554127874dec867b6cff7914e7789c70e18171fb861d04e82e1",
+      "producer": "control-plane",
+      "schemaVersion": "aperture.evidence.v1"
+    }
+  ],
+  "gaps": {
+    "unavailable": [
+      "generation.model.fingerprint",
+      "output.rawModelPatch",
+      "output.humanEditDelta",
+      "generation.capabilities.declared",
+      "generation.delegations",
+      "generation.context.retrieved",
+      "generation.capabilities.sandbox:unisolated_process"
+    ],
+    "selfReported": [
+      "coverage.governed",
+      "generation.capabilities.enforcement",
+      "generation.context.agentRead"
+    ],
+    "coverage": {
+      "governed": true,
+      "reason": "commit is bound to governance run RUN-6B95E4FC"
+    }
+  },
+  "limitations": [
+    "capabilities 为 declared_only：工具面与沙箱状态来自启动方自述，未被独立观测。"
+  ],
+  "integrity": {
+    "artifactDigest": "sha256:e9f18f0b2b52e0ef258db6df95c7ac0406d9d635bce24c25e34b5c19c8ffa378",
+    "signature": null
+  }
+}
