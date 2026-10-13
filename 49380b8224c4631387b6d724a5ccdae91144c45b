@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "ai-provenance/v1",
+  "artifactId": "prov-76f5fee59a9980a1",
+  "recordedAt": "2026-10-13T03:01:28Z",
+  "binding": {
+    "repository": "https://github.com/u2pia/banking-kyc.git",
+    "baseTree": "36528352435cef346cff374376787cc0bfdbf35f",
+    "headTree": "sha1:4853182cb6577204b929c18a6fcb899c34e267c1",
+    "patchId": "sha1:76f5fee59a9980a194c27ab47c084c9bd03606dd",
+    "commitSha": "49380b8224c4631387b6d724a5ccdae91144c45b",
+    "branch": "HEAD"
+  },
+  "change": {
+    "title": "给 KYC 报告加一个导出为 Markdown 的入口",
+    "filesChanged": 3,
+    "additions": 44,
+    "deletions": 1,
+    "author": {
+      "kind": "agent",
+      "id": "RUN-33C097FD",
+      "displayName": "u2pia.cc"
+    }
+  },
+  "intent": {
+    "status": "approved",
+    "id": "WI-B9DA5C09:v1",
+    "version": 1,
+    "statement": "为 KYC 报告提供一个 Markdown 导出入口，使已有 KYC 摘要能被调用方获得为非空 Markdown 文本，并且文本去除前导空白后以 # 开头。",
+    "nonGoals": [
+      "不在应用界面中添加下载、分享或存储 Markdown 文件的入口。",
+      "不生成 PDF、HTML、CSV 等其他报告格式。",
+      "不修改 KYC 摘要的数据来源、字段、权限控制或展示逻辑。",
+      "不处理、迁移或访问生产环境中的真实 KYC 数据。"
+    ],
+    "constraints": [
+      "不得删除 test/kyc.test.ts 中已有测试用例，也不得将其标记为 skip 或 todo。",
+      "不得减少或替换 test/kyc.test.ts 中已有测试用例的断言。",
+      "不得修改 src/kyc.ts 中已有导出函数的名称、参数数量、参数类型或返回类型。",
+      "不得在实现或测试中新增文件系统写入、网络请求、剪贴板访问或外部服务调用。",
+      "不得在测试夹具中使用真实个人身份数据或生产环境 KYC 数据。",
+      "不得在渲染 Markdown 时改变已有 KYC 摘要字段值。"
+    ],
+    "acceptanceCriteria": [
+      {
+        "id": "AC-1",
+        "statement": "test/kyc.test.ts 中存在名为 'kyc markdown export returns a non-empty string' 的测试用例，该用例调用 KYC Markdown 导出函数并断言返回值类型为 string。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-2",
+        "statement": "名为 'kyc markdown export returns a non-empty string' 的测试用例断言返回值经过 trim 后长度大于 0。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-3",
+        "statement": "名为 'kyc markdown export returns a non-empty string' 的测试用例断言返回值经过 trimStart 后以 '#' 开头。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-4",
+        "statement": "node-tests 执行名为 'kyc markdown export returns a non-empty string' 的测试用例，且结果为 passed。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-5",
+        "statement": "node-tests check 的退出码为 0。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-6",
+        "statement": "application-build check 的退出码为 0。",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "proven"
+      }
+    ],
+    "approvedBy": {
+      "kind": "human",
+      "id": "ACT-812022DB",
+      "at": "2026-10-13T02:57:05.884Z",
+      "identityAssurance": "local_session"
+    },
+    "source": "control_plane",
+    "retroactive": false,
+    "requirement": {
+      "document": "docs/KYC-DESIGN.md",
+      "section": "§3",
+      "id": "REQ-7"
+    }
+  },
+  "generation": {
+    "model": {
+      "requested": "qwen3.8-max",
+      "served": "qwen3.8-max",
+      "models": [
+        "qwen3.8-max"
+      ],
+      "source": "control_plane"
+    },
+    "capabilities": {
+      "enforcement": "declared_only",
+      "source": "control_plane",
+      "allowedTools": [
+        "list_files",
+        "read_file",
+        "write_file",
+        "replace_in_file",
+        "finish"
+      ],
+      "mcpServers": [],
+      "network": "unrestricted",
+      "sandbox": {
+        "kind": "none",
+        "productionEligible": false
+      }
+    },
+    "context": {
+      "injected": [
+        {
+          "path": "README.md",
+          "digest": "sha256:cd452148200c6e89849339bf6ad2bb8aa4bef34c8779bfbb222bd9fb4423a204",
+          "bytes": 1939,
+          "required": true
+        },
+        {
+          "path": "package.json",
+          "digest": "sha256:7db4cbabbb822e539fade6e19c802f28f7fa1f660bdef6257105ef067a341914",
+          "bytes": 199,
+          "required": true
+        },
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:d230e48e06b163eee45694f4ea04ab00e4f7f49129dead5aa41acd060a1cb40a",
+          "bytes": 613,
+          "required": true
+        },
+        {
+          "path": "test/kyc.test.ts",
+          "digest": "sha256:6a89cb91716a2058c704e31fb4313caa4ba6dd3d1586627758d19ac5508a63fc",
+          "bytes": 495,
+          "required": true
+        }
+      ],
+      "agentRead": [
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:6c31bb23e3803dfa292b4df3680c8a17a4d6c1035fbea188b1dc941826fbe0e0",
+          "declared": true,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "test/kyc.test.ts",
+          "digest": "sha256:948683043f90813a2f5378a5ce12b8e079f249ad07ab454403d297d5191990cc",
+          "declared": true,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:6c31bb23e3803dfa292b4df3680c8a17a4d6c1035fbea188b1dc941826fbe0e0",
+          "declared": true,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "scripts/build.mjs",
+          "digest": "sha256:0c0604070f687380f2f8b587a057605a13c385992e5ead5e05310d732eebbdbc",
+          "declared": false,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "test/kyc.test.ts",
+          "digest": "sha256:948683043f90813a2f5378a5ce12b8e079f249ad07ab454403d297d5191990cc",
+          "declared": true,
+          "source": "builder_wrapper"
+        }
+      ],
+      "retrieved": [],
+      "skills": []
+    },
+    "harness": {
+      "name": "local-command-agent@0.2",
+      "version": null,
+      "digest": "sha256:0143ba3f1c2d9e586115f17d1adcf454079ff28ddc7d684339b43e7dbacc1a1e"
+    },
+    "budget": {
+      "stopReason": "completed"
+    }
+  },
+  "output": null,
+  "checks": [
+    {
+      "name": "node-tests",
+      "kind": "test",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 530,
+      "provenance": "pre_existing",
+      "isolation": "none",
+      "stdoutDigest": "sha256:de642ad30715e65910edec6a3bf245f3f3ee7bda97a7ef4490f2e60fe79a181d",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "application-build",
+      "kind": "build",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 292,
+      "provenance": "unknown",
+      "isolation": "none",
+      "stdoutDigest": "sha256:5e386d736e8b8dc85ef013414bd998f87acc5e0905969e3eed2a98bc0034afab",
+      "stderrDigest": "sha256:1c7774b8d4d42ca7f4e4737c8c20b5c044b449615181fdc123f3f40d22e20d59"
+    },
+    {
+      "name": "node-tests@baseline",
+      "kind": "test",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 435,
+      "provenance": "unknown",
+      "isolation": "none",
+      "stdoutDigest": "sha256:bcd3bc36f929b6ba56250e866159ca55364e69b4d38b68e90f1b201e94c4cb17",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review": [
+    {
+      "decision": "approved",
+      "actorId": "ACT-812022DB",
+      "displayName": "Real Case Reviewer",
+      "at": "2026-10-13T02:58:58.710Z",
+      "headSha": "eacab14b3dceff90eda8a426b8e4cc2469fcfeba",
+      "identityAssurance": "local_session",
+      "comment": "AC-1（test/kyc.test.ts 中存在名为 'kyc markdown exp…）：已核对，确认通过（读过 Agent 写的测试）\nAC-2（名为 'kyc markdown export returns a non-em…）：已核对，确认通过（读过 Agent 写的测试）\nAC-3（名为 'kyc markdown export returns a non-em…）：已核对，确认通过（读过 Agent 写的测试）\nAC-4（node-tests 执行名为 'kyc markdown export ret…）：已核对，确认通过（读过 Agent 写的测试）\nAC-5（node-tests check 的退出码为 0。）：已核对，确认通过（读过 Agent 写的测试）",
+      "selfApproved": false
+    }
+  ],
+  "evidence": [
+    {
+      "uri": "local://evidence/eacab14b3dce/RUN-33C097FD.json",
+      "digest": "sha256:sha256:e7228f6bcce61ec5ca2f8a02d971a84a47093e26cbcde159c6219dc31631f172",
+      "producer": "control-plane",
+      "schemaVersion": "aperture.evidence.v1"
+    }
+  ],
+  "gaps": {
+    "unavailable": [
+      "generation.model.fingerprint",
+      "output.rawModelPatch",
+      "output.humanEditDelta",
+      "intent.requirement.documentRevision",
+      "generation.delegations",
+      "generation.context.retrieved",
+      "generation.capabilities.sandbox:unisolated_process"
+    ],
+    "selfReported": [
+      "coverage.governed",
+      "generation.capabilities.enforcement",
+      "generation.context.agentRead"
+    ],
+    "coverage": {
+      "governed": true,
+      "reason": "commit is bound to governance run RUN-33C097FD"
+    }
+  },
+  "limitations": [
+    "capabilities 为 declared_only：工具面与沙箱状态来自启动方自述，未被独立观测。"
+  ],
+  "integrity": {
+    "artifactDigest": "sha256:ba715e6acfbebac97c499af2c3a530a95844251684fe4078161701ba7d0e74f8",
+    "signature": null
+  }
+}
