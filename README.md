@@ -6,6 +6,7 @@ Banking KYC service. Changes land through the Aperture control plane: an approve
 
 - 入口：`src/kyc.ts` 的 `exportKycReportMarkdown(customer)`，接收已有 KYC 摘要（`Customer`），返回 Markdown 文本
 - 纯渲染、确定性输出：仅格式化摘要中已有的字段值，不修改字段值，不发起文件系统写入、网络请求或外部服务调用
+- 表格结构安全：单元格值中的竖线会被转义为 `\|`，换行会被折叠为字面量 `\n`，因此无论字段值包含什么字符，表格始终保持一行一条记录、列数不变；不含这些字符的值输出逐字节不变（不做 HTML 转义，那是渲染器的职责）
 - 返回值非空，去除前导空白后以 `#` 开头
 - 测试：`test/kyc.test.ts`
 

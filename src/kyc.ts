@@ -16,6 +16,21 @@ export function openCase(input: { id: string; fullName: string; dateOfBirth: str
 }
 
 /**
+ * Renders a single field value as a Markdown table cell.
+ *
+ * Only characters that would break the table structure are neutralised:
+ * unescaped pipes are escaped as `\|` and line breaks are collapsed to the
+ * literal two-character sequence `\n` so a record always stays on one line.
+ * Values that contain neither are returned byte-for-byte unchanged, and no
+ * HTML escaping is performed (that is the renderer's responsibility).
+ */
+function markdownCell(value: string): string {
+  return value
+    .replace(/\r\n|\r|\n/g, '\\n')
+    .replace(/(?<!\\)\|/g, '\\|')
+}
+
+/**
  * Exports an existing KYC summary as Markdown text.
  *
  * The rendering is pure and deterministic: it only formats the fields already
@@ -30,11 +45,11 @@ export function exportKycReportMarkdown(customer: Customer): string {
     '',
     '| Field | Value |',
     '| --- | --- |',
-    `| ID | ${customer.id} |`,
-    `| Full name | ${customer.fullName} |`,
-    `| Date of birth | ${customer.dateOfBirth} |`,
-    `| Document number | ${customer.documentNumber ?? '—'} |`,
-    `| Status | ${customer.status} |`,
+    `| ID | ${markdownCell(customer.id)} |`,
+    `| Full name | ${markdownCell(customer.fullName)} |`,
+    `| Date of birth | ${markdownCell(customer.dateOfBirth)} |`,
+    `| Document number | ${markdownCell(customer.documentNumber ?? '—')} |`,
+    `| Status | ${markdownCell(customer.status)} |`,
     '',
     '> Disclaimer: this report is a deterministic rendering of an existing KYC summary. It is for reference only and does not constitute a compliance conclusion or legal opinion.',
     ''
