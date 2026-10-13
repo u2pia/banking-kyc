@@ -1,7 +1,7 @@
 {
   "schemaVersion": "ai-provenance/v1",
   "artifactId": "prov-f6cb8ff3560f29e7",
-  "recordedAt": "2026-10-13T05:49:06Z",
+  "recordedAt": "2026-10-13T05:49:12Z",
   "binding": {
     "repository": "https://github.com/u2pia/banking-kyc.git",
     "baseTree": "4853182cb6577204b929c18a6fcb899c34e267c1",
@@ -245,7 +245,7 @@
     "capabilities 为 declared_only：工具面与沙箱状态来自启动方自述，未被独立观测。"
   ],
   "integrity": {
-    "artifactDigest": "sha256:420953e3eca9904108142b021c3f467064aebd9410fa2228d1d4ecb921d1c6c4",
+    "artifactDigest": "sha256:51ce684599c7c461dc353a6b9508a49e7df9ed810333d775cc5b194dea33ed8b",
     "signature": null
   }
 }
