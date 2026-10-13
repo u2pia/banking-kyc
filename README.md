@@ -2,6 +2,13 @@
 
 Banking KYC service. Changes land through the Aperture control plane: an approved Intent, an agent run, evidence, and a named reviewer before merge.
 
+## KYC 报告 Markdown 导出
+
+- 入口：`src/kyc.ts` 的 `exportKycReportMarkdown(customer)`，接收已有 KYC 摘要（`Customer`），返回 Markdown 文本
+- 纯渲染、确定性输出：仅格式化摘要中已有的字段值，不修改字段值，不发起文件系统写入、网络请求或外部服务调用
+- 返回值非空，去除前导空白后以 `#` 开头
+- 测试：`test/kyc.test.ts`
+
 ## KYC 参考流程生成
 
 - 入口：`src/kycFlow.ts` 的 `generateKycFlow({ audience: 'developer', format: 'compact' })`
