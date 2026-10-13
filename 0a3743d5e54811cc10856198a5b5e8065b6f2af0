@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "ai-provenance/v1",
+  "artifactId": "prov-f6cb8ff3560f29e7",
+  "recordedAt": "2026-10-13T05:49:06Z",
+  "binding": {
+    "repository": "https://github.com/u2pia/banking-kyc.git",
+    "baseTree": "4853182cb6577204b929c18a6fcb899c34e267c1",
+    "headTree": "sha1:68af8ba48e0cfd74a78b8fadfd9141fc40992c47",
+    "patchId": "sha1:f6cb8ff3560f29e7f2cd77b5ffae9922b96054b8",
+    "commitSha": "0a3743d5e54811cc10856198a5b5e8065b6f2af0",
+    "branch": "HEAD"
+  },
+  "change": {
+    "title": "KYC Markdown 报告在字段含竖线或换行时会破坏表格",
+    "filesChanged": 3,
+    "additions": 107,
+    "deletions": 6,
+    "author": {
+      "kind": "agent",
+      "id": "RUN-409BDD49",
+      "displayName": "u2pia.cc"
+    }
+  },
+  "intent": {
+    "status": "approved",
+    "id": "WI-881D322C:v3",
+    "version": 3,
+    "statement": "无论客户字段里有什么字符，导出的 Markdown 表格结构都保持完整：一行一条记录，竖线和换行都不会改变列数。",
+    "nonGoals": [
+      "不做 HTML 转义（那是渲染器的事，不是导出器的事）",
+      "不改动报告的其他部分：标题、免责声明、字段顺序"
+    ],
+    "constraints": [
+      "不得删除或弱化既有测试",
+      "不得改变现有正常值的输出（Ada Lovelace 那一行必须逐字节不变）",
+      "不得引入新依赖",
+      "不得改变函数签名 exportKycReportMarkdown(customer: Customer): string",
+      "新增或修改的测试在统计表格列数时，必须排除被转义的空格竖线（\\|），不得用 split('|') 直接计数"
+    ],
+    "acceptanceCriteria": [
+      {
+        "id": "AC-1",
+        "statement": "fullName 为 \"Ada | Lovelace\" 时，导出的 Markdown 中该字段所在行恰好有 3 个列分隔符（即不被反斜杠转义的竖线）",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-2",
+        "statement": "fullName 含换行时，导出的 Markdown 表格不会因此多出一行",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      },
+      {
+        "id": "AC-3",
+        "statement": "值为 \"Ada Lovelace\" 时导出结果与修改前逐字节相同",
+        "criticality": "critical",
+        "verificationType": "deterministic",
+        "status": "unproven"
+      }
+    ],
+    "approvedBy": {
+      "kind": "human",
+      "id": "ACT-812022DB",
+      "at": "2026-10-13T05:45:08.909Z",
+      "identityAssurance": "local_session"
+    },
+    "source": "control_plane",
+    "retroactive": false,
+    "requirement": {
+      "document": "docs/kyc-report-export.md",
+      "section": "§2 表格字段转义",
+      "id": "KYC-REQ-7"
+    }
+  },
+  "generation": {
+    "model": {
+      "requested": "qwen3.8-max",
+      "served": "qwen3.8-max",
+      "models": [
+        "qwen3.8-max"
+      ],
+      "source": "control_plane"
+    },
+    "capabilities": {
+      "enforcement": "declared_only",
+      "source": "control_plane",
+      "allowedTools": [
+        "list_files",
+        "read_file",
+        "write_file",
+        "replace_in_file",
+        "finish"
+      ],
+      "mcpServers": [],
+      "network": "unrestricted",
+      "sandbox": {
+        "kind": "none",
+        "productionEligible": false
+      }
+    },
+    "context": {
+      "injected": [
+        {
+          "path": "README.md",
+          "digest": "sha256:85a4abee036c473cfb8e39e6dd167cc0a7c6c0ee4d1190e52cb24f9c286d035b",
+          "bytes": 2347,
+          "required": true
+        },
+        {
+          "path": "package.json",
+          "digest": "sha256:7db4cbabbb822e539fade6e19c802f28f7fa1f660bdef6257105ef067a341914",
+          "bytes": 199,
+          "required": true
+        },
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:6c31bb23e3803dfa292b4df3680c8a17a4d6c1035fbea188b1dc941826fbe0e0",
+          "bytes": 1565,
+          "required": true
+        },
+        {
+          "path": "test/kyc.test.ts",
+          "digest": "sha256:948683043f90813a2f5378a5ce12b8e079f249ad07ab454403d297d5191990cc",
+          "bytes": 905,
+          "required": true
+        }
+      ],
+      "agentRead": [
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:e7764a3978fa87dd2ac0415f11a95aeb9fd9c3db93d0fe702e810f34e5b99231",
+          "declared": true,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "test/kyc.test.ts",
+          "digest": "sha256:ba3aa1fe4ef5dfcca9ea5aada50c298c7bdfbf0aacbd721a059169f177d60cd4",
+          "declared": true,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "src/kyc.ts",
+          "digest": "sha256:e7764a3978fa87dd2ac0415f11a95aeb9fd9c3db93d0fe702e810f34e5b99231",
+          "declared": true,
+          "source": "builder_wrapper"
+        },
+        {
+          "path": "scripts/build.mjs",
+          "digest": "sha256:0c0604070f687380f2f8b587a057605a13c385992e5ead5e05310d732eebbdbc",
+          "declared": false,
+          "source": "builder_wrapper"
+        }
+      ],
+      "retrieved": [],
+      "skills": []
+    },
+    "harness": {
+      "name": "local-command-agent@0.2",
+      "version": null,
+      "digest": "sha256:0143ba3f1c2d9e586115f17d1adcf454079ff28ddc7d684339b43e7dbacc1a1e"
+    },
+    "budget": {
+      "stopReason": "completed"
+    }
+  },
+  "output": null,
+  "checks": [
+    {
+      "name": "node-tests",
+      "kind": "test",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 475,
+      "provenance": "pre_existing",
+      "isolation": "none",
+      "stdoutDigest": "sha256:2b5612c87ec0f94f8647452b90c3c1470e578e9a8307affc138a0add3be00046",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "application-build",
+      "kind": "build",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 290,
+      "provenance": "unknown",
+      "isolation": "none",
+      "stdoutDigest": "sha256:5e386d736e8b8dc85ef013414bd998f87acc5e0905969e3eed2a98bc0034afab",
+      "stderrDigest": "sha256:a467aed246c9c6e4be08156a4a9ec00ac6044d3cb72a32e75df482bee1748050"
+    },
+    {
+      "name": "node-tests@baseline",
+      "kind": "test",
+      "conclusion": "success",
+      "exitCode": 0,
+      "durationMs": 501,
+      "provenance": "unknown",
+      "isolation": "none",
+      "stdoutDigest": "sha256:b529a7feafc84a4702b61378350deb541c978414da84e2c9c0d05b433610be70",
+      "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review": [
+    {
+      "decision": "approved",
+      "actorId": "ACT-812022DB",
+      "displayName": "Real Case Reviewer",
+      "at": "2026-10-13T05:48:22.167Z",
+      "headSha": "81cdeb178bf389b4fe3e21a1ca535f702e30666f",
+      "identityAssurance": "local_session",
+      "comment": "AC-1（fullName 为 \"Ada | Lovelace\" 时，导出的 Markdo…）：已核对，确认通过（读过 Agent 写的测试）\nAC-2（fullName 含换行时，导出的 Markdown 表格不会因此多出一行）：已核对，确认通过（读过 Agent 写的测试）\nAC-3（值为 \"Ada Lovelace\" 时导出结果与修改前逐字节相同）：已核对，确认通过（读过 Agent 写的测试）",
+      "selfApproved": false
+    }
+  ],
+  "evidence": [
+    {
+      "uri": "local://evidence/81cdeb178bf3/RUN-409BDD49.json",
+      "digest": "sha256:sha256:44f6653d8008268562feb3e52282f23063b8a9abc2b1559e27b67d5f0590c2cb",
+      "producer": "control-plane",
+      "schemaVersion": "aperture.evidence.v1"
+    }
+  ],
+  "gaps": {
+    "unavailable": [
+      "generation.model.fingerprint",
+      "output.rawModelPatch",
+      "output.humanEditDelta",
+      "intent.requirement.documentRevision",
+      "generation.delegations",
+      "generation.context.retrieved",
+      "generation.capabilities.sandbox:unisolated_process"
+    ],
+    "selfReported": [
+      "coverage.governed",
+      "generation.capabilities.enforcement",
+      "generation.context.agentRead"
+    ],
+    "coverage": {
+      "governed": true,
+      "reason": "commit is bound to governance run RUN-409BDD49"
+    }
+  },
+  "limitations": [
+    "capabilities 为 declared_only：工具面与沙箱状态来自启动方自述，未被独立观测。"
+  ],
+  "integrity": {
+    "artifactDigest": "sha256:420953e3eca9904108142b021c3f467064aebd9410fa2228d1d4ecb921d1c6c4",
+    "signature": null
+  }
+}
